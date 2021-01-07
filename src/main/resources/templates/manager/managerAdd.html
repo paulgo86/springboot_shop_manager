@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP MANAGER</title>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    
+    <link rel="stylesheet" href="/css/style.css">    
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Shop Manager</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">             
+              <li class="active"><a href="/manager">매니저 관리</a></li>
+              <li><a href="/item">상품 관리</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <form id="managerAddForm" action="/manager/addManager" method="post">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li><a href="/manager">매니저 목록</a></li>
+                    
+                    <!-- <li><a href="/manager/detail">매니저 조회</a></li> -->
+                    <li class="active"><a href="/manager/add">매니저 등록</a></li>
+                </ul>                
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1 class="page-header">매니저 등록</h1>
+                
+                <div class="sub-header">
+                    <span style="font-size:x-large;margin-right:20px;">매니저 정보</span>                    
+                </div>
+                <div style="padding:20px;">
+                    <div class="input-group mb-3" style="margin-bottom:10px;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">아이디</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                            name="name"
+                            id="m_name"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3" style="margin-bottom:10px;">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default"
+                            name="id"
+                            id="m_id"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <button type="button" class="btn btn-info" id="manager_add">등록하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <script src="/js/shopManager.js" charset="utf-8">
+    
+    
+    </script>
+    
+
+</body>
+</html>

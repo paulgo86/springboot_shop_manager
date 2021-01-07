@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP MANAGER</title>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 서버용 링크 -->
+    <link rel="stylesheet" href="/css/style.css">    
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Shop Manager</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">             
+              <li class="active"><a href="/manager">매니저 관리</a></li>
+              <li><a href="/item">상품 관리</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+  
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="/manager">매니저 목록</a></li>
+                    
+                    <!-- <li><a href="/manager/detail">매니저 조회</a></li> -->
+                    <li><a href="/manager/add">매니저 등록</a></li>
+                </ul>                
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>idx</th>
+                          <th>아이디</th>
+                          <th>이름</th>
+                          <th>상품수</th>
+                          <th>가입일</th>
+                          <th>삭제하기</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+                          <td th:text="${list.idx}">1</td>
+                          <td th:text="${list.id}">tester</td>
+                          <td th:text="${list.name}">테스터</td>
+                          <td th:text="${list.itemCount}">7</td>
+                          <td th:text="${list.regiDate}">2021.01.07</td>
+                          <td><button type="button" class="btn btn-danger removeManager"
+                          	th:attr="name=${list.idx}"                         	
+                          >X</button></td>
+                        </tr>
+                        <tr th:unless="${#lists.size(list)} > 0" th:each="list : ${list}">
+                        	<td colspan="4">등록된 매니저가 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="/js/shopManager.js"></script>
+        
+
+</body>
+</html>

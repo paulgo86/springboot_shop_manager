@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP MANAGER</title>
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- 부가적인 테마 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- 개발용 링크 -->
+    <link rel="stylesheet" href="../css/item.css">    
+    <!-- 서버용 링크 -->
+    <link rel="stylesheet" href="/css/style.css">    
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Shop Manager</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">             
+              <li><a href="/manager">매니저 관리</a></li>
+              <li class="active"><a href="/item">상품 관리</a></li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+  
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li class="active"><a href="/item">전체 상품목록</a></li>
+                    <!-- 수정과 삭제는 상품상세에서 합니다. -->
+                    <!-- 상품 상세에는 아이디를 입력하여 조회할 수 있습니다. -->
+                    <!-- <li><a href="/item/search">상품 검색</a></li> -->
+                    <li><a href="/item/add">상품 등록</a></li>
+                </ul>                
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>idx</th>
+                          <th>이미지</th>
+                          <th>상품명</th>
+                          <th>가격</th>
+                          <th>재고</th>
+                          <th>매니저</th>
+                          <th>상세보기</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+                            <td th:text="${list.idx}">1</td>
+                            <td style="width: 350px;">
+                                <img style="width:300px;height:200px;object-fit: cover;" 
+                                    src="/images/" 
+                                    th:attrappend="src=${list.image}"/>
+                            </td>
+                            <td th:text="${list.name}">삼다수</td>
+                            <td th:text="${list.price}">1500</td>
+                            <td th:text="${list.stock}">100</td>
+                            <td th:text="${list.manager}">tester</td>
+                            <td><button type="button" class="btn btn-info detailItem"
+                                th:attr="name=${list.idx}"                         	
+                            >상세</button></td>
+                        </tr>
+                        <tr th:unless="${#lists.size(list)} > 0" th:each="list : ${list}">
+                        	<td colspan="7">등록된 상품이 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="/js/shopManager.js"></script>
+        
+</body>
+</html>
