@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "custom.path.uri_path",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.path.uri_path'"
+  },
+  {
+    "name": "custom.path.location",
+    "type": "java.lang.String",
+    "description": "A description for 'custom.path.location'"
+  }
+]}

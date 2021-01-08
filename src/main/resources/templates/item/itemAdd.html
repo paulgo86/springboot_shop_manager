@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 	<head>
     	<meta charset="UTF-8">
    
@@ -51,37 +51,62 @@
 	                    <span style="font-size:x-large;margin-right:20px;">상품 정보</span>
 	                    <button type="button" class="btn btn-info" id="add_item">상품등록</button>
 	                </div>
-	                <div style="padding:20px;">
-	                    <div class="input-group mb-3" style="margin-bottom:10px;">
+	                <div style="height: 100px;padding:20px;">
+	                	<div class="input-group mb-3" style="float:left; margin-left:15px; margin-bottom:15px;">
+	                        <div class="input-group-prepend">
+	                            <span class="input-group-text" id="inputGroup-sizing-default">매니저</span>
+	                        </div>
+	                        <select style="height: 35px;" id="i_manager">
+	                        	<option th:if="${#lists.size(list)} > 0" value=-1>
+	                        		매니저를 선택해주세요.
+	                        	</option>
+	                        	<option th:if="${#lists.size(list)} > 0" 
+	                        		th:each="list : ${list}"
+	                        		th:value=${list.idx}
+	                        		th:text="${list.name}+' ( '+ ${list.id}+' )'">
+	                        		매니저이름 ( 매니저아이디 )
+	                        	</option>
+	                        	<option th:unless="${#lists.size(list)} > 0">
+	                        		등록된 매니저가 없습니다.
+	                        	</option>
+	                        </select>
+	                    </div>
+	                    <div class="input-group mb-3" style="float:left; margin-left:15px; margin-bottom:15px;">
 	                        <div class="input-group-prepend">
 	                            <span class="input-group-text" id="inputGroup-sizing-default">상품명</span>
 	                        </div>
 	                        <input type="text" class="form-control" aria-label="Default"
 	                            name="name"
+	                            id="i_name"
 	                            aria-describedby="inputGroup-sizing-default">
 	                    </div>
-	                    <div class="input-group mb-3" style="margin-bottom:10px;">
+	                    <div class="input-group mb-3" style="float:left; margin-left:15px; margin-bottom:15px;">
 	                        <div class="input-group-prepend">
 	                            <span class="input-group-text" id="inputGroup-sizing-default">가격</span>
 	                        </div>
 	                        <input type="number" class="form-control" aria-label="Default"
 	                            name="price"
+	                            id="i_price"
 	                            aria-describedby="inputGroup-sizing-default">
 	                    </div>
-	                    <div class="input-group mb-3" style="margin-bottom:10px;">
+	                    <div class="input-group mb-3" style="float:left; margin-left:15px; margin-bottom:15px;">
 	                        <div class="input-group-prepend">
 	                            <span class="input-group-text" id="inputGroup-sizing-default">재고 수량</span>
 	                        </div>
 	                        <input type="number" class="form-control" aria-label="Default"
 	                            name="stock"
+	                            id="i_stock"
 	                            aria-describedby="inputGroup-sizing-default">
 	                    </div>
 	                </div>
+	                <br/>
 	                <div class="sub-header">
 	                    <span style="font-size:x-large;margin-right:20px;">상품 미리보기 이미지</span>
 	                    <button type="button" class="btn btn-info" id="add_list_image">추가하기</button>
 	                </div>
+	                
 	                <input type="file" id="fileInput" style="display: none;" multiple="multiple"/>
+	                
 	                <div class="imgListWrapper">
 	                    <div class="cardWrapper">
 	                    </div>
@@ -100,7 +125,7 @@
 	    </div>
 	
 	
-	
+		<form id="itemAdd" action="/item/add" enctype="multipart/form-data" method="post"></form>
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	

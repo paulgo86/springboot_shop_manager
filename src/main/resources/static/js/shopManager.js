@@ -96,6 +96,62 @@
 	    console.log(e.target.files);
 	    imageFileManager.addImage(e.target.files);
 	});
+	
+	
+	// upload item
+	$('#add_item').click(()=>{
+		// check manager id
+		let managerIdx = $('#i_manager').val();
+		if(managerIdx == -1){
+			return alert("매니저를 선택해주세요.");
+		}
+		
+		// check item name, price, stock
+		let itemName = $('#i_name').val();
+		let itemPrice = $('#i_price').val();		
+		let itemStock = $('#i_stock').val();
+		
+		if(!(itemName && itemPrice && itemStock ) ){
+			return alert("상품 정보를 입력해주세요.");
+		}
+		
+		// managerId, name, price, stock
+		let fd = new FormData();
+		fd.append("name",itemName);
+		fd.append("price",itemPrice);
+		fd.append("stock",itemStock);
+		fd.append("managerIdx",managerIdx);
+		imageFileManager.list_images.forEach(f=>{
+			fd.append("list_image",f)
+		});
+		imageFileManager.content_images.forEach(f=>{
+			fd.append("content_image",f);
+		});
+		
+		for(let v of fd.entries()){
+			console.log(v[0],v[1]);
+		}
+		
+		$.ajax({
+			type: 'POST',
+			url: '/item/addItem',
+			cache: false,
+			contentType: false,
+			processData: false,
+			data:fd,
+			success:function(result){
+				console.log(result);
+				console.log('ok');
+				alert("등록 성공");
+				window.location.href="/item";
+			},
+			error:function(e){
+				console.log(e);
+				console.log('error');
+				alert("등록 실패");
+			}			
+		});		
+	});
 
         
 	// add manager

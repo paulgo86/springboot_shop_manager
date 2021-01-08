@@ -23,6 +23,7 @@ public class ManagerServiceImpl implements ManagerService {
 	public void insertManager(ManagerDto manager) throws Exception {
 		// TODO Auto-generated method stub
 		managerMapper.insertManager(manager);
+		System.out.println(manager.getIdx()+"번 매니저 생성");
 	}
 
 	@Override

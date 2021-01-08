@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shopManager.mapper.ItemMapper">
+	<select id="selectItemList" resultType="shopManager.dto.ItemDto">
+		<![CDATA[
+			SELECT				
+				i.idx as idx,
+				(
+					SELECT
+						name
+					FROM
+						image
+					WHERE
+						item_idx = i.idx AND
+						type = "list_image"
+					ORDER BY
+						idx DESC
+					LIMIT
+						1
+				) as image,
+				i.name as name,
+				i.price as price,
+				i.stock as stock,
+				(
+					SELECT
+						concat(manager.name,"(",manager.id,")")
+					FROM
+						manager
+					WHERE
+						idx = i.manager_idx
+				) AS manager,
+				i.regi_date as regi_date
+			FROM
+				item i
+			ORDER BY
+				i.idx DESC			
+		]]>
+	</select>
+	
+	<select id="selectItemDetail" parameterType="int" resultType="shopManager.dto.ItemDto">
+		<![CDATA[
+			SELECT
+				i.idx as idx,
+				(
+					SELECT
+						name
+					FROM
+						image
+					WHERE
+						item_idx = i.idx AND
+						type = "list_image"
+					ORDER BY
+						idx DESC
+					LIMIT
+						1
+				) as image,
+				i.name as name,
+				i.price as price,
+				i.stock as stock,
+				(
+					SELECT
+						concat(manager.name,"(",manager.id,")")
+					FROM
+						manager
+					WHERE
+						idx = i.manager_idx
+				) AS manager,
+				i.regi_date as regi_date
+			FROM
+				item i
+			WHERE
+				i.idx = #{itemIdx}
+		]]>
+	</select>
+	
+	<insert id="insertItem" parameterType="shopManager.dto.ItemDto" useGeneratedKeys="true" keyProperty="idx">
+		<![CDATA[
+			INSERT INTO item
+			(
+				manager_idx,
+				name,
+				stock,
+				price				
+			) 
+			VALUES 
+			(
+				#{managerIdx}, 
+				#{name},
+				#{stock},
+				#{price}
+			)
+		]]>
+	</insert>	
+	
+	<delete id="deleteItem" parameterType="int">
+		<![CDATA[
+			DELETE FROM item
+			WHERE idx = #{idx}			
+		]]>
+	</delete>
+	
+	<insert id="insertItemImage" parameterType="shopManager.dto.ImageDto">
+		<![CDATA[
+			INSERT INTO image
+			(
+				item_idx,
+				type,
+				name
+			)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+			(
+				#{item.itemIdx},
+				#{item.type},
+				#{item.name}				
+			)
+		</foreach>
+	</insert>
+	
+	<select id="selectItemImage" parameterType="int" resultType="shopManager.dto.ImageDto">
+		<![CDATA[
+			SELECT
+				idx,
+				type,
+				name
+			FROM
+				image
+			WHERE
+				item_idx = #{itemIdx}
+			ORDER BY
+				idx DESC
+		]]>
+	</select>
+</mapper>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
    
@@ -70,7 +70,7 @@
                             <td th:text="${list.idx}">1</td>
                             <td style="width: 350px;">
                                 <img style="width:300px;height:200px;object-fit: cover;" 
-                                    src="/images/" 
+                                    src="/static/images/" 
                                     th:attrappend="src=${list.image}"/>
                             </td>
                             <td th:text="${list.name}">삼다수</td>
